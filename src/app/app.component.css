@@ -30,6 +30,12 @@
   font-weight: bold;
 }
 
+.movie_list .stars {
+  position: relative;
+  left: 0;
+  width: 65%;
+}
+
 .movie_list .delete {
   text-align: center;
   display: inline-block;

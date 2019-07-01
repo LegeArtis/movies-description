@@ -44,7 +44,7 @@ app.route('/all').get((req, res) => {
  * после отправки информации в базу данных, файл даляется
  */
 app.post('/load', upload.single('text'), function (req, res) {
-  if (!req.file) {
+  if (!req.file || (!path.extname(req.file.originalname))) {
     console.log('No file received');
     res.send();
   } else {
