@@ -1,0 +1,15 @@
+<form #myForm="ngForm" class="load" (ngSubmit)="myForm.reset(file)">
+  <div class="file">
+    <input type="file" name="file" ng2FileSelect [uploader]="uploader" accept=".txt" #file ngModel/>
+  </div>
+  <div class="button">
+    <input type="submit" value="Загрузить" (click)="uploader.uploadAll()" >
+  </div>
+</form>
+
+
+<div [hidden]="err" class="err_window">
+  <div class="err">Для загрузки файла выбери текстовый файл (.txt)
+  <button (click)="hide()">Ok</button>
+  </div>
+</div>

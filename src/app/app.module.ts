@@ -3,14 +3,22 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {FileSelectDirective} from 'ng2-file-upload';
+import { LoadComponent } from './load/load.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FileSelectDirective,
+    LoadComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
