@@ -1,27 +1,42 @@
-# Movies
+# MovieDescription
+Проект создан с использованием [Angular CLI](https://github.com/angular/angular-cli) 8.0.3, NodeJS 10.15.0, MongoDB Atlas и находится в стадии разработки. Запуск проекта возможен только локально и для запуска необходим установленний Angular 8, Node JS и Git.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.3.
+### Инструкция по запуску приложения:
+1. Клонирование проекта на ПК. Все команды выполняются в командной строке:
+  - Создать новый проект командой "ng new project_name";
+  - Перейти в папку с проектом "cd projejct_name";
+  - Добавить удаленный репозиторий, где name это краткое его название, может быть любое на ваш выбор       
+    "git remote add name https://github.com/LegeArtis/movies-description.gitl";
+  - Проверка обновления и добавления их в локальный репозиторий "git fetch name";
+  - Переход в скачаную ветку "git checkout name/master" Пример удачного клонирования. Папка с проектом называется "movietest", короткая запись удаленного репозитория "site" 
+  ![alt text](https://cdn.discordapp.com/attachments/560778836703182858/593688560339779585/unknown.png)
+2. Запустить веб сервер командой "ng serve -o". После запуска приложения откроется главная станица в браузере (`http://localhost:4200/`);
+3. В командной строке перейти в папку api;
+4. Запустить сервер командой "nodemon server";
+5. Приложение готово к работе.
 
-## Development server
+### Архитектура
+  Данное приложение использует стандартную схему взаимосвязи между Angular, NODE API и DB. Изображение ниже демонстрирует их.
+  ![alt text](https://cdn.scotch.io/scotchy-uploads/2013/11/mean.jpg)
+  
+  ### Рассмотрим архитектуру приложения, которое находится в папке api:
+  
+  ![alt text](https://cdn.discordapp.com/attachments/560778836703182858/593542949766430720/unknown.png)
+  
+  В папке api находится приложение, выполняющее роль посредника (NODE API на изображении взаимосвязей).
+Пройдемся по основным файлам приложения:
+- Model.js модель, которая описывает основные целевые параметры приложения;
+- routes.js вспомогательный файл для server.js. В него вынесены все запросы какие мы получаем или отправляем  к базе данных или к пользователью;
+- server.js это основной файл для запуска приложения, в нем настривается связь с базой данных и само приложение для прослушивания порта 3000.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+  ### Рассмотрим архитектуру приложения Angular
 
-## Code scaffolding
+![alt tex](https://cdn.discordapp.com/attachments/560778836703182858/593548364038012972/unknown.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+  На изображении мы види часть проекта которая отвечает за сторону пользователя.
+  Пройдемся по основным файлам:
+   - app.component.html load.component.html отвечают за формирование страницы;
+   - app.component.css load.component.css расположение и отображение элементов на странице;
+   - load.component.ts отвечает за прием и отправку текстового файла;
+   - app.component.ts отвечает за поиск, добавление, удаление и отображения списка, ответа на поиск.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
