@@ -13,7 +13,7 @@
       </div>
   </form>
 
-  <form #addForm="ngForm"  ngNativeValidate class="add" (ngSubmit)="onAdd(title.value, year.value, format.value, name.value); addForm.resetForm()">
+  <form #addForm="ngForm" ngNativeValidate class="add" (ngSubmit)="onAdd(title.value, year.value, format.value, name.value); addForm.resetForm()">
     <div class="add_title">
       <input type="text" placeholder="название фильма" #title required ngModel name="title" />
     </div>
@@ -58,7 +58,12 @@
   </div>
 </div>
 
-
+<div [hidden]="incorrectData" class="really_delete">
+  <div class="really">
+    Введены некоректные данные!
+    <button class="yes" (click)="incorrectData = true">Ок</button>
+  </div>
+</div>
 
 
 <router-outlet></router-outlet>

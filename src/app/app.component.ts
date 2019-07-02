@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   deleteWindow = true;
   searchName;
   searchTitle;
+  incorrectData = true;
 
 
   constructor(private http: HttpClient) {}
@@ -43,10 +44,13 @@ export class AppComponent implements OnInit {
 
   public onAdd(title, year, format, name) {
     const formatList = ['VHS', 'DVD', 'Blu-Ray'];
-
-    if (title && year >= 1850 && year <= 2020 && formatList.includes(format) && name) {
+    if (name.trim() === '' || title.trim() === '' || year < 1850 || year > 2020 || !formatList.includes(format)) {
+      console.log('Whitespace detected !');
+      this.incorrectData = false;
+    } else {
       const stars = name.split(',').map((elem) => elem.trim());
       const movie = new Movie(title, stars, year, format);
+      console.log(movie);
 
       console.log('Try to add');
       this.http.post(`${this.url}add`, movie).subscribe(() => console.log('onAdd OK'));

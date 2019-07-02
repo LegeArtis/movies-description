@@ -96,15 +96,28 @@ function parser (file){
  * Добавляет обьекс типа Movie в базу
  */
 app.route('/add').post((req, res) => {
+  const formatList = ['VHS', 'DVD', 'Blu-Ray'];
   console.log(req.body);
-  let movie = new Movie(req.body);
 
-  movie.save().then(() => {
-    res.status(200).json({'movie': 'movie in added successfully'});
-  }).catch(err => {
-    res.status(400).send('unable to save to database');
-    console.log(err);
-  })
+  if (req.body.title &&
+    req.body.year <= 2020 &&
+    req.body.year >= 1850 &&
+    req.body.stars &&
+    formatList.includes(req.body.format) &&
+    req.body.title.trim() !== '' &&
+    req.body.stars[0].trim() !== '') {
+
+    let movie = new Movie(req.body);
+
+    movie.save().then(() => {
+      res.status(200).json({'movie': 'movie in added successfully'});
+    }).catch(err => {
+      res.status(400).send('unable to save to database');
+      console.log(err);
+    })
+  } else {
+    res.status(400).send(' Try to add incorrect object');
+  }
 });
 
 /**
