@@ -42,12 +42,21 @@ export class AppComponent implements OnInit {
   }
 
   public onAdd(title, year, format, name) {
-    const stars = name.split(',').map((elem) => elem.trim());
-    const movie = new Movie(title, stars, year, format);
+    const formatList = ['VHS', 'DVD', 'Blu-Ray'];
 
-    console.log('Try to add');
-    this.http.post(`${this.url}add`, movie ).subscribe(() => console.log('onAdd OK'));
-    this.getAll();
+    if (title && year >= 1850 && year <= 2020 && formatList.includes(format) && name) {
+      const stars = name.split(',').map((elem) => elem.trim());
+      const movie = new Movie(title, stars, year, format);
+
+      console.log('Try to add');
+      this.http.post(`${this.url}add`, movie).subscribe(() => console.log('onAdd OK'));
+
+      if (this.searchName || this.searchTitle) {
+        this.onSearch(this.searchTitle, this.searchName);
+      } else {
+        this.getAll();
+      }
+    }
   }
 
   public reallyDelete(movie) {
@@ -64,6 +73,7 @@ export class AppComponent implements OnInit {
     this.http.post(`${this.url}delete/`, movie).subscribe( () => console.log('delete movie'));
     this.movies.splice(this.movies.indexOf(movie), 1);
     this.hideDeleteWindow();
+    this.getAll();
   }
 }
 
